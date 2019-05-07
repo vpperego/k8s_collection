@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spark-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: spark-worker
+  template:
+    metadata:
+      labels:
+        component: spark-worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: vpperego/spark-standalone:2.3.3
+          imagePullPolicy: Always
+          command: ["/bin/sh","-c"]
+          args: ["chmod +x spark-worker;./spark-worker"]
+          ports:
+            - containerPort: 8081
+          resources:
+            limits:
+              cpu: "2"
+            requests:
+              cpu: "1.0"

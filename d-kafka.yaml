@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1                                                                                                                                                                          
+metadata:                                                                                                                                                                                    
+  name: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: kafka
+  template:
+    metadata:
+      labels:
+        component: kafka
+    spec:
+      containers:
+        - name: kafka
+          image: vpperego/kafka:2.2.0
+          imagePullPolicy: Always
+          command: ["/bin/sh","-c"]
+          args: ["kafka-server-start.sh server.properties"]
+          #         args: ["kafka-server-start.sh /opt/kafka/config/server.properties"]
+          ports:
+            - containerPort: 9092
