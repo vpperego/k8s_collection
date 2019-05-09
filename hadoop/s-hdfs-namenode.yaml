@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hdfs-namenode
+spec:
+  ports:
+    - name: nn-rpc
+      protocol: TCP
+      port: 8020
+      targetPort: 8020
+    - name: nn-web
+      protocol: TCP
+      port: 50070
+      targetPort: 50070
+  type: NodePort
+  selector:
+    component: hdfs-namenode
