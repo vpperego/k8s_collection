@@ -17,7 +17,8 @@ spec:
           image: vpperego/spark-standalone:2.3.3
           imagePullPolicy: Always
           command: ["/bin/sh","-c"]
-          args: ["chmod +x common.sh;chmod +x spark-master;./spark-master"]
+          #  args: ["chmod +x common.sh;chmod +x spark-master;./spark-master"]
+          args: ["unset SPARK_MASTER_PORT;$SPARK_HOME/bin/spark-class org.apache.spark.deploy.master.Master"]
           #args: ["cat spark-master"]
           ports:
             - containerPort: 7077
