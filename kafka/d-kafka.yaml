@@ -1,23 +1,31 @@
 kind: Deployment
 apiVersion: apps/v1                                                                                                                                                                          
-metadata:                                                                                                                                                                                    
-  name: kafka
+metadata:                                                                                                                                  
+  name: kafka-broker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: kafka
+      component: kafka-broker
   template:
     metadata:
       labels:
-        component: kafka
+        component: kafka-broker
     spec:
       containers:
-        - name: kafka
+        - name: kafka-broker
           image: vpperego/kafka:2.2.0
           imagePullPolicy: Always
           command: ["/bin/sh","-c"]
-          args: ["kafka-server-start.sh /server.properties"]
-          #         args: ["kafka-server-start.sh /opt/kafka/config/server.properties"]
+          #args: ["zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties;kafka-server-start.sh /opt/kafka/config/server.properties"]
+          #args: ["chmod +x start.sh;./start.sh"]
+          args: ["chmod +x new_start.sh;./new_start.sh"]
           ports:
             - containerPort: 9092
+          env:
+          - name: KAFKA_BROKER_ID
+            value: "0"    
+          - name: KAFKA_ADVERTISED_PORT
+            value: "9092"   
+          - name: KAFKA_ZOOKEEPER_CONNECT
+            value: zookeeper:2181   

@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: kafka
+  name: kafka-broker
 spec:
   ports:
     - name: kafka-port
@@ -10,4 +10,4 @@ spec:
       targetPort: 9092
   type: NodePort
   selector:
-    component: kafka
+    component: kafka-broker

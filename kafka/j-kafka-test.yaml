@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kafka-test
+spec:
+  completions: 1
+  template:
+    metadata:
+      name: kafka-test
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: scala-test
+        image: vpperego/kafka:2.2.0
+        imagePullPolicy: Always
+        command: ["/bin/sh","-c"]
+        args: ["while [ 1 ];do sleep 600; done"]
