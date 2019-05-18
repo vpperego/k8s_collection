@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spark-batch
+spec:
+  completions: 1
+  template:
+    metadata:
+      name: spark-batch
+    spec:
+      volumes:
+       - name: test-volume
+         hostPath:
+           path: /home/ubuntu/workload
+      restartPolicy: Never
+      containers:
+      - name: spark-batch
+        image: vpperego/spark-standalone:2.3.3
+        imagePullPolicy: Always
+        command: ["/bin/sh","-c"]
+        args: ["spark-submit --master local[*] --driver-memory 6g /data/joinExperiments.jar M-TPCQ3 /data/small-batch-tpchq3.conf"]
+        resources:
+          requests:
+            cpu: "3500m"
+            memory: 6G
+        volumeMounts:
+            - mountPath: /data
+              name: test-volume
+      nodeSelector:
+        role: storage
