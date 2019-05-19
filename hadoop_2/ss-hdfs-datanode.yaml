@@ -22,18 +22,21 @@ spec:
       labels:
         component: hdfs-datanode
     spec:
+      nodeSelector:
+        role: storage
       containers:
         - name: hdfs-datanode
           image: vpperego/k8s-hdfs:2.7.7
           imagePullPolicy: Always
           command: ["/bin/sh","-c"]
-          args: ["mv dn-core-site.xml ${HADOOP_CONF_DIR}/core-site.xml;HADOOP_HOME/bin/hadoop datanode -format; $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR datanode"]
+          #          args: ["mv dn-core-site.xml ${HADOOP_CONF_DIR}/core-site.xml;HADOOP_HOME/bin/hadoop datanode -format; $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR datanode"]
+          args: ["chmod +x /hdfs-datanode; ./hdfs-datanode"]
           ports:
             - containerPort: 22
             - containerPort: 9000
           volumeMounts:
           - name: hdfs-data
-            mountPath: /hadoop/dfs/data
+            mountPath: /opt/hadoop/data
           resources:
             requests:
               cpu: 100m

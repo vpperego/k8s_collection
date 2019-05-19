@@ -12,6 +12,8 @@ spec:
       labels:
         component: hdfs-namenode
     spec:
+      nodeSelector:
+        role: storage
       volumes:
       - name: hdfs-name
         persistentVolumeClaim:
@@ -32,5 +34,5 @@ spec:
             name: nn-web
           volumeMounts:
           - name: hdfs-name
-            mountPath: /hadoop/dfs/name
+            mountPath: /opt/hadoop/name
 

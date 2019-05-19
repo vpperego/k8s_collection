@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hdfs-datanode
+spec:
+  ports:
+    - name: dn-unique
+      protocol: TCP
+      port: 80
+  selector:
+    component: hdfs-datanode
