@@ -12,6 +12,12 @@ spec:
       labels:
         component: spark-master
     spec:
+      volumes:
+       - name: test-volume
+         hostPath:
+           path: /home/ubuntu/spark
+      nodeSelector:
+        sparkrole: master
       containers:
         - name: spark-master
           image: vpperego/spark-standalone:2.3.3
@@ -25,4 +31,8 @@ spec:
             - containerPort: 8080
           resources:
             requests:
-              cpu: 100m
+              cpu: "3"
+              memory: 7G
+          volumeMounts:
+            - mountPath: /data
+              name: test-volume

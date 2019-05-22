@@ -1,17 +1,12 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: v1
+kind: Pod
 metadata:
   name: kafka-test
 spec:
-  completions: 1
-  template:
-    metadata:
-      name: kafka-test
-    spec:
-      restartPolicy: Never
-      containers:
-      - name: scala-test
-        image: vpperego/kafka:2.2.0
-        imagePullPolicy: Always
-        command: ["/bin/sh","-c"]
-        args: ["while [ 1 ];do sleep 600; done"]
+  containers:
+  - name: scala-test
+    image: vpperego/kafka:2.2.0
+    imagePullPolicy: IfNotPresent
+    restartPolicy: Never
+    command: ["/bin/sh","-c"]
+    args: ["kafka-topics.sh --create --bootstrap-server kafka-broker:9092 --replication-factor 1 --partitions 4 --topic customer; kafka-topics.sh --create --bootstrap-server kafka-broker:9092 --replication-factor 1 --partitions 4 --topic order;kafka-topics.sh --create --bootstrap-server kafka-broker:9092 --replication-factor 1 --partitions 4 --topic lineitem"]

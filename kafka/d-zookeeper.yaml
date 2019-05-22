@@ -20,3 +20,5 @@ spec:
             - containerPort: 2181
             - containerPort: 2888
             - containerPort: 3888
+      nodeSelector:
+        role: kafka

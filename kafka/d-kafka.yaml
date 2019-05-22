@@ -29,3 +29,5 @@ spec:
             value: "9092"   
           - name: KAFKA_ZOOKEEPER_CONNECT
             value: zookeeper:2181   
+      nodeSelector:
+        role: kafka

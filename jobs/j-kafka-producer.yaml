@@ -18,7 +18,9 @@ spec:
         image: vpperego/scala:2.11.8
         imagePullPolicy: Always
         command: ["/bin/sh","-c"]
-        args: ["scala  /data/kafkaTools-assembly-0.1.jar /data/kafka-producer.conf"]
+        args: ["scala  /data/kafkaTools-assembly-0.1.jar /data/s-producer.conf"]
         volumeMounts:
             - mountPath: /data
               name: test-volume
+      nodeSelector:
+        role: kafka

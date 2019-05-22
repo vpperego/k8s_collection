@@ -16,7 +16,7 @@ items:
             values:
             - lkworker04
     capacity:
-      storage: 1Gi
+      storage: 8Gi
     accessModes:
     - ReadWriteOnce
     storageClassName: default
@@ -37,7 +37,7 @@ items:
             values:
             - lkworker04
     capacity:
-      storage: 1Gi
+      storage: 8Gi
     accessModes:
     - ReadWriteOnce
     storageClassName: default
@@ -58,7 +58,7 @@ items:
             values:
             - lkworker04
     capacity:
-      storage: 1Gi
+      storage: 8Gi
     accessModes:
     - ReadWriteOnce
     storageClassName: default
@@ -78,7 +78,7 @@ items:
     storageClassName: default
     resources:
       requests:
-        storage: 1Gi
+        storage: 8Gi
 
 kind: List
 metadata: {}
