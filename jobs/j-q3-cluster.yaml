@@ -3,7 +3,7 @@ kind: Job
 metadata:
   name: spark-q3-materialized
 spec:
-  completions: 3
+  completions: 1
   template:
     metadata:
       name: spark-q3-materialized
@@ -19,11 +19,11 @@ spec:
         imagePullPolicy: Always
         command: ["/bin/sh","-c"]
         # args: ["spark-submit --master local[*] --driver-memory 6g /data/joinExperiments.jar M-TPCQ3 file:///data/i-q3.conf"]
-        args: ["spark-submit --master spark://spark-master:7077 --deploy-mode client --driver-memory 4G --num-executors 2 --executor-cores 2 --executor-memory 3G  /data/joinExperiments.jar M-TPCQ3 hdfs:/conf/i-q3.conf"]
+        args: ["spark-submit --master spark://spark-master:6066 --deploy-mode cluster --driver-memory 6G --num-executors 2 --executor-cores 3 --executor-memory 6G  /data/joinExperiments.jar M-TPCQ3 hdfs:/conf/i-q3.conf"]
         resources:
-          requests:
-            cpu: "3"
-            memory: 7G
+                #  requests:
+                #cpu: "3"
+                #memory: 7G
         volumeMounts:
             - mountPath: /data
               name: test-volume

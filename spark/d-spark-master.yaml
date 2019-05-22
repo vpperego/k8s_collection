@@ -29,10 +29,11 @@ spec:
           ports:
             - containerPort: 7077
             - containerPort: 8080
-          resources:
-            requests:
-              cpu: "3"
-              memory: 7G
+            - containerPort: 6066
+              #          resources:
+              #requests:
+              #cpu: "3"
+              #memory: 7G
           volumeMounts:
             - mountPath: /data
               name: test-volume

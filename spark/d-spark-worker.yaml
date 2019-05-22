@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: spark-worker
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       component: spark-worker
@@ -12,6 +12,10 @@ spec:
       labels:
         component: spark-worker
     spec:
+      volumes:
+       - name: test-volume
+         hostPath:
+           path: /home/ubuntu/spark
       containers:
         - name: spark-worker
           image: vpperego/spark-standalone:2.3.3
@@ -24,3 +28,6 @@ spec:
             requests:
               cpu: "3"
               memory: 7G
+          volumeMounts:
+            - mountPath: /data
+              name: test-volume
