@@ -1,21 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: spark-master
+  name: spark-worker
 spec:
   ports:
-    - name: webui
+    - name: webuiw
       protocol: TCP
-      port: 8080
-      targetPort: 8080
-    - name: nova
-      protocol: TCP
-      port: 6066
-      targetPort: 6066
-    - name: spark
-      protocol: TCP
-      port: 7077
-      targetPort: 7077
+      port: 8081
     - name: bmng
       protocol: TCP
       port: 55000
@@ -27,4 +18,4 @@ spec:
       port: 7337
   type: NodePort
   selector:
-    component: spark-master
+    component: spark-worker

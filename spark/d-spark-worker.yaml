@@ -21,7 +21,7 @@ spec:
           image: vpperego/spark-standalone:2.3.3
           imagePullPolicy: Always
           command: ["/bin/sh","-c"]
-          args: ["chmod +x spark-worker;./spark-worker"]
+          args: ["unset SPARK_WORKER_PORT;chmod +x spark-worker;./spark-worker"]
           ports:
             - containerPort: 8081
           resources:
