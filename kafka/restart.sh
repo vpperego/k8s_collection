@@ -1,3 +1,4 @@
+kubectl delete job.batch/kafka-producer
 kubectl delete deployment.apps/kafka-broker
 kubectl delete deployment.apps/zookeeper
 sleep 5
