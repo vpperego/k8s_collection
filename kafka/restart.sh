@@ -1,6 +1,7 @@
 kubectl delete job.batch/kafka-producer
 kubectl delete deployment.apps/kafka-broker
 kubectl delete deployment.apps/zookeeper
-sleep 5
+sleep 10
 kubectl create -f d-zookeeper.yaml
+sleep 5
 kubectl create -f d-kafka.yaml

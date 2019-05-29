@@ -1,12 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: spark-q3-cluster-2
+  name: spark-q5-cluster-2
 spec:
   completions: 1
   template:
     metadata:
-      name: spark-q3-cluster-2
+      name: spark-q5-cluster-2
     spec:
       volumes:
        - name: test-volume
@@ -14,11 +14,11 @@ spec:
            path: /home/ubuntu/spark
       restartPolicy: Never
       containers:
-      - name: spark-q3-cluster-2
+      - name: spark-q5-cluster-2
         image: vpperego/spark-standalone:2.3.3
         imagePullPolicy: Always
         command: ["/bin/sh","-c"]
-        args: ["spark-submit --master spark://spark-master:6066 --deploy-mode cluster --conf \"spark.driver.cores=4\" --driver-memory 6G --num-executors 2 --executor-cores 4 --executor-memory 6G  /data/joinExperiments.jar M-TPCQ3 hdfs:/i-q3-cluster.conf"]
+        args: ["spark-submit --master spark://spark-master:6066 --deploy-mode cluster --conf \"spark.driver.cores=4\" --driver-memory 6G --num-executors 2 --executor-cores 4 --executor-memory 6G  /data/joinExperiments.jar M-TPCQ3 hdfs:/i-q5-cluster.conf"]
         resources:
                 #  requests:
                 #cpu: "3"
