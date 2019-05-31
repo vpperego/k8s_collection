@@ -1,3 +1,4 @@
+kubectl delete job kafka-sf-0.2-producer
 kubectl delete job.batch/kafka-producer
 kubectl delete deployment.apps/kafka-broker
 kubectl delete deployment.apps/zookeeper
