@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: window-storage-3
+spec:
+  completions: 3
+  template:
+    metadata:
+      name: window-storage-3
+    spec:
+      volumes:
+       - name: test-volume
+         hostPath:
+           path: /home/ubuntu/spark
+      restartPolicy: Never
+      containers:
+      - name: window-storage-3
+        image: vpperego/spark-standalone:2.3.3
+        imagePullPolicy: Always
+        command: ["/bin/sh","-c"]
+        args: ["spark-submit --master local[*] --driver-memory 7g --conf spark.memory.storageFraction=0.3 /data/joinExperiments.jar M-TPCQ3 hdfs:/i-q3_window-standalone.conf"]
+        resources:
+          requests:
+            cpu: "3900m"
+            memory: 7G
+        volumeMounts:
+            - mountPath: /data
+              name: test-volume
+      nodeSelector:
+        sparkrole: master
