@@ -1,12 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: spark-batch
+  name: kafka-producer
 spec:
   completions: 1
   template:
     metadata:
-      name: spark-batch
+      name: scala-test
     spec:
       volumes:
        - name: test-volume
@@ -14,15 +14,11 @@ spec:
            path: /home/ubuntu/workload
       restartPolicy: Never
       containers:
-      - name: spark-batch
-        image: vpperego/spark-standalone:2.3.3
+      - name: scala-test
+        image: vpperego/scala:2.11.8
         imagePullPolicy: Always
         command: ["/bin/sh","-c"]
-        args: ["spark-submit --master local[*] --driver-memory 6g /data/joinExperiments.jar M-TPCQ3 hdfs:/b-q3.conf"]
-        resources:
-                #          requests:
-                #cpu: "3500m"
-                #memory: 6G
+        args: ["scala  /data/kafkaTools-assembly-0.1.jar /data/q2_0.2-producer.conf"]
         volumeMounts:
             - mountPath: /data
               name: test-volume

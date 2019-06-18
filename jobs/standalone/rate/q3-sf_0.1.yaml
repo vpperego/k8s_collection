@@ -1,30 +1,30 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: spark-batch
+  name: spark-q3-materialized
 spec:
-  completions: 1
+  completions: 3
   template:
     metadata:
-      name: spark-batch
+      name: spark-q3-materialized
     spec:
       volumes:
        - name: test-volume
          hostPath:
-           path: /home/ubuntu/workload
+           path: /home/ubuntu/spark
       restartPolicy: Never
       containers:
-      - name: spark-batch
+      - name: spark-q3-materialized
         image: vpperego/spark-standalone:2.3.3
         imagePullPolicy: Always
         command: ["/bin/sh","-c"]
-        args: ["spark-submit --master local[*] --driver-memory 6g /data/joinExperiments.jar M-TPCQ3 hdfs:/b-q3.conf"]
+        args: ["spark-submit --master local[*] --conf \"spark.streaming.kafka.maxRatePerPartition=1250\" --driver-memory 6g /data/joinExperiments.jar M-TPCQ3 hdfs:/q3-rate.conf"]
         resources:
-                #          requests:
-                #cpu: "3500m"
-                #memory: 6G
+          requests:
+            cpu: "3900m"
+            memory: 7G
         volumeMounts:
             - mountPath: /data
               name: test-volume
       nodeSelector:
-        role: kafka
+        sparkrole: master

@@ -6,3 +6,4 @@ sleep 10
 kubectl create -f d-zookeeper.yaml
 sleep 5
 kubectl create -f d-kafka.yaml
+sleep 5
